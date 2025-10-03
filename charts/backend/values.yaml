@@ -1,0 +1,14 @@
+replicaCount: 2
+image:
+  repository: <sua-conta>.dkr.ecr.us-east-1.amazonaws.com/ezops-backend
+  tag: "v1.0.0"
+  pullPolicy: IfNotPresent
+
+service:
+  port: 80
+  targetPort: 8080
+  type: ClusterIP
+
+envFromSecret: backend-db
+
+targetGroupArn: "arn:aws:elasticloadbalancing:us-east-1:654654369899:targetgroup/luan-test-tg/3df1444ba2975bcf"
