@@ -15,3 +15,9 @@ service:
 envFromSecret: backend-db
 
 targetGroupArn: "arn:aws:elasticloadbalancing:us-east-1:654654369899:targetgroup/luan-test-tg/3df1444ba2975bcf"
+
+serviceAccount:
+  create: false
+  name: aws-load-balancer-controller
+  annotations:
+    eks.amazonaws.com/role-arn: arn:aws:iam::654654369899:role/luan-test-alb-controller-role
