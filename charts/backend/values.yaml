@@ -1,13 +1,16 @@
 replicaCount: 2
+
 image:
-  repository: <sua-conta>.dkr.ecr.us-east-1.amazonaws.com/ezops-backend
-  tag: "v1.0.0"
+  repository: 654654369899.dkr.ecr.us-east-1.amazonaws.com/luan-test-backend
+  # a tag será substituída na pipeline pelo hash do commit
+  tag: "<COMMIT_HASH>"
   pullPolicy: IfNotPresent
 
 service:
   port: 80
   targetPort: 8080
   type: ClusterIP
+
 
 envFromSecret: backend-db
 
