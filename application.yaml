@@ -1,17 +1,17 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: backend
+  name: aws-load-balancer-controller
   namespace: argocd
 spec:
   project: default
   source:
     repoURL: git@github.com:LuanCristopher/GitOps-EzOps.git
     targetRevision: main
-    path: charts/backend
+    path: charts/aws-load-balancer-controller
   destination:
     server: https://kubernetes.default.svc
-    namespace: ezops
+    namespace: kube-system
   syncPolicy:
     automated:
       prune: true

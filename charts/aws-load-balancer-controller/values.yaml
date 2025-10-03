@@ -1,0 +1,16 @@
+clusterName: luan-test-eks
+
+serviceAccount:
+  create: false
+  name: aws-load-balancer-controller
+  annotations:
+    eks.amazonaws.com/role-arn: arn:aws:iam::654654369899:role/luan-test-alb-controller-role
+
+region: us-east-1
+vpcId: vpc-0c87a30af5433c953
+
+replicaCount: 2
+
+image:
+  repository: amazon/aws-load-balancer-controller
+  tag: v2.7.1
