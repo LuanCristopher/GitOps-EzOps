@@ -1,0 +1,14 @@
+replicaCount: 2
+
+image:
+  repository: 654654369899.dkr.ecr.us-east-1.amazonaws.com/ezops-frontend
+  tag: "latest"
+  pullPolicy: IfNotPresent
+
+service:
+  type: ClusterIP
+  port: 80
+
+ingress:
+  enabled: true
+  host: luanoliveira-frontend.exam.ezopscloud.tech

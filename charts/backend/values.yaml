@@ -1,23 +1,14 @@
 replicaCount: 2
 
 image:
-  repository: 654654369899.dkr.ecr.us-east-1.amazonaws.com/luan-test-backend
-  # a tag será substituída na pipeline pelo hash do commit
-  tag: "<COMMIT_HASH>"
+  repository: 654654369899.dkr.ecr.us-east-1.amazonaws.com/ezops-backend
+  tag: "latest"   # será trocado pela pipeline
   pullPolicy: IfNotPresent
 
 service:
-  port: 80
-  targetPort: 8080
   type: ClusterIP
+  port: 80
 
-
-envFromSecret: backend-db
-
-targetGroupArn: "arn:aws:elasticloadbalancing:us-east-1:654654369899:targetgroup/luan-test-tg/3df1444ba2975bcf"
-
-serviceAccount:
-  create: false
-  name: aws-load-balancer-controller
-  annotations:
-    eks.amazonaws.com/role-arn: arn:aws:iam::654654369899:role/luan-test-alb-controller-role
+ingress:
+  enabled: true
+  host: luanoliveira-backend.exam.ezopscloud.tech
