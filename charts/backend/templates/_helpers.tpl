@@ -1,11 +1,12 @@
 {{- define "backend.name" -}}
-{{- default .Chart.Name .Values.nameOverride | trunc 63 | trimSuffix "-" -}}
+{{ .Chart.Name }}
 {{- end -}}
 
 {{- define "backend.fullname" -}}
-{{- if .Values.fullnameOverride -}}
-{{- .Values.fullnameOverride | trunc 63 | trimSuffix "-" -}}
-{{- else -}}
-{{- printf "%s-%s" .Release.Name .Chart.Name | trunc 63 | trimSuffix "-" -}}
+{{ printf "%s-%s" .Chart.Name .Release.Name | trunc 63 | trimSuffix "-" }}
 {{- end -}}
+
+{{- define "backend.labels" -}}
+app.kubernetes.io/name: {{ include "backend.name" . }}
+app.kubernetes.io/instance: {{ .Release.Name }}
 {{- end -}}

@@ -1,14 +1,33 @@
 replicaCount: 2
 
 image:
-  repository: 654654369899.dkr.ecr.us-east-1.amazonaws.com/ezops-backend
-  tag: "latest"   # será trocado pela pipeline
+  repository: 654654369899.dkr.ecr.us-east-1.amazonaws.com/luan-test-backend
+  tag: "7b4fb95"
   pullPolicy: IfNotPresent
+
+# Porta **dentro do container**
+containerPort: 3000
 
 service:
   type: ClusterIP
+  # Porta do Service (externo ao pod). Mantemos 80.
   port: 80
 
 ingress:
   enabled: true
-  host: luanoliveira-backend.exam.ezopscloud.tech
+  host: api.luanoliveira.exam.ezopscloud.tech
+  className: alb
+  annotations:
+    kubernetes.io/ingress.class: alb
+    alb.ingress.kubernetes.io/scheme: internet-facing
+    alb.ingress.kubernetes.io/target-type: ip
+    alb.ingress.kubernetes.io/listen-ports: '[{"HTTP":80}]'
+    alb.ingress.kubernetes.io/healthcheck-path: /posts
+    alb.ingress.kubernetes.io/healthcheck-port: traffic-port
+
+resources: {}
+
+envFrom:
+  - secretRef:
+      name: rds-credentials
+

@@ -3,20 +3,26 @@ kind: Deployment
 metadata:
   name: {{ include "backend.fullname" . }}
   labels:
-    app: {{ include "backend.name" . }}
+    {{- include "backend.labels" . | nindent 4 }}
 spec:
   replicas: {{ .Values.replicaCount }}
   selector:
     matchLabels:
-      app: {{ include "backend.name" . }}
+      app.kubernetes.io/instance: {{ .Release.Name }}
+      app.kubernetes.io/name: {{ include "backend.name" . }}
   template:
     metadata:
       labels:
-        app: {{ include "backend.name" . }}
+        app.kubernetes.io/instance: {{ .Release.Name }}
+        app.kubernetes.io/name: {{ include "backend.name" . }}
     spec:
       containers:
-        - name: backend
+        - name: {{ include "backend.name" . }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           ports:
-            - containerPort: {{ .Values.service.port }}
+            - containerPort: {{ .Values.containerPort }}
+          {{- if .Values.envFrom }}
+          envFrom:
+{{ toYaml .Values.envFrom | indent 12 }}
+          {{- end }}
