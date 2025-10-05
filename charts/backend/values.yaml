@@ -2,7 +2,7 @@ replicaCount: 2
 
 image:
   repository: 654654369899.dkr.ecr.us-east-1.amazonaws.com/luan-test-backend
-  tag: "4a73b83"
+  tag: "9e49bc1"
   pullPolicy: IfNotPresent
 
 containerPort: 3000
