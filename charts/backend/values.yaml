@@ -1,5 +1,7 @@
 replicaCount: 2
 
+fullnameOverride: backend-backend
+
 image:
   repository: 654654369899.dkr.ecr.us-east-1.amazonaws.com/luan-test-backend
   tag: "d1b0f08"
