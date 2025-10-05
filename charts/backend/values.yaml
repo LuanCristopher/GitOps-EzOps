@@ -5,12 +5,11 @@ image:
   tag: "4a73b83"
   pullPolicy: IfNotPresent
 
-# Porta **dentro do container**
 containerPort: 3000
 
 service:
   type: ClusterIP
-  port: 3000
+  port: 80  # <- o ALB fala na porta 80; dentro do pod é redirecionado para 3000
 
 ingress:
   enabled: true
@@ -20,13 +19,13 @@ ingress:
     kubernetes.io/ingress.class: alb
     alb.ingress.kubernetes.io/scheme: internet-facing
     alb.ingress.kubernetes.io/target-type: ip
-    alb.ingress.kubernetes.io/listen-ports: '[{"HTTP":80}]'
+    alb.ingress.kubernetes.io/listen-ports: '[{"HTTP":80},{"HTTPS":443}]'
+    alb.ingress.kubernetes.io/certificate-arn: arn:aws:acm:us-east-1:654654369899:certificate/d81fc789-ad6e-47a8-9871-7b45d27cd6e2
     alb.ingress.kubernetes.io/healthcheck-path: /posts
     alb.ingress.kubernetes.io/healthcheck-port: traffic-port
-
-resources: {}
+    alb.ingress.kubernetes.io/ssl-redirect: '443'
+  tls: false  # opcional, já que o ALB lida com TLS
 
 envFrom:
   - secretRef:
       name: rds-credentials
-
