@@ -2,7 +2,7 @@ replicaCount: 2
 
 image:
   repository: 654654369899.dkr.ecr.us-east-1.amazonaws.com/luan-test-backend
-  tag: "7b4fb95"
+  tag: "4a73b83"
   pullPolicy: IfNotPresent
 
 # Porta **dentro do container**
@@ -10,8 +10,7 @@ containerPort: 3000
 
 service:
   type: ClusterIP
-  # Porta do Service (externo ao pod). Mantemos 80.
-  port: 80
+  port: 3000
 
 ingress:
   enabled: true
