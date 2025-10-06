@@ -4,7 +4,7 @@ fullnameOverride: backend-backend
 
 image:
   repository: 654654369899.dkr.ecr.us-east-1.amazonaws.com/luan-test-backend
-  tag: "d1b0f08"
+  tag: "ca2c7dd"
   pullPolicy: IfNotPresent
 
 containerPort: 3000
